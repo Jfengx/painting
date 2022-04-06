@@ -1,0 +1,55 @@
+*
+  padding 0
+  margin 0
+
+_absolute()
+  position absolute
+
+_relative()
+  position relative
+
+_sticky()
+  position sticky
+
+_flex()
+  display flex
+
+.rel
+  _relative()
+
+.abs
+  _absolute()
+  &.clip
+    top 0
+    left 0
+
+.sti
+  _sticky()
+  top 0
+
+.full
+  width 100%
+  height 100%
+
+.full-screen
+  width 100%
+  height 100vh
+
+.flex
+  _flex()
+
+.flex-center
+  display flex
+  justify-content center
+  align-items center
+
+.flex
+.flex-center
+  &.column
+    flex-direction column
+
+.abs-center
+  _absolute()
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
