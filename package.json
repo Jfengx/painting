@@ -21,6 +21,7 @@
     "laser-pen": "^1.0.0",
     "typescript": "^4.5.4",
     "unplugin-auto-import": "^0.6.9",
+    "unplugin-vue-components": "^0.18.5",
     "vite": "^2.9.0",
     "vite-plugin-glsl": "^0.1.2",
     "vue-tsc": "^0.29.8"

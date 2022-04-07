@@ -1,6 +1,5 @@
 <template lang="pug">
 #home.rel.full-screen.flex-center.column
-  Nav
   .avatar.rel
     img.full(src='@/assets/j.png' @click='enjoy')
     .desc 我画的很烂，但我很自信😎
@@ -8,9 +7,6 @@
 
 </template>
 <script setup lang="ts">
-import Nav from '../components/Nav/index.vue';
-import Laser from '../components/Laser/index.vue';
-
 const router = useRouter();
 
 const enjoy = () => {

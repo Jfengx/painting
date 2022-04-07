@@ -5,11 +5,7 @@
       Artboard
 </template>
 
-<script setup lang="ts">
-import Artboard from '../components/Artboard/index.vue';
-
-onMounted(() => {});
-</script>
+<script setup lang="ts"></script>
 
 <style lang="stylus" scoped>
 #gallery
