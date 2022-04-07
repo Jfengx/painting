@@ -13,6 +13,9 @@
 <script setup lang="ts">
 import { draw } from './command/index';
 
+const getImageUrl = (name: string) => {
+  return new URL(`../../assets/gallery/${name}.jpg`, import.meta.url).href;
+};
 const gallery = [
   '《害羞蓝人中了毒》',
   '《持仓》',
@@ -20,7 +23,7 @@ const gallery = [
   '《十连》',
   '《帅气史莱姆》',
   '《dream car》',
-].map((name) => ({ name, src: `/src/assets/gallery/${name}.jpg` }));
+].map((name) => ({ name, src: getImageUrl(name) }));
 
 const canvas = ref<Nullable<HTMLCanvasElement>>(null);
 const scroll = reactive(useScroll(window));
