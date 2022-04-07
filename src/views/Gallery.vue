@@ -15,7 +15,7 @@ onMounted(() => {});
 #gallery
   .container
     width 100%
-    height 300vh
+    height 700vh
     .inner
       //
 </style>

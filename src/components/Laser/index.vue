@@ -36,13 +36,14 @@ const initCanvas = (entries) => {
 const initLaser = () => {
   setRoundCap(true);
   setTension(0.1);
-  setMaxWidth(20);
+  setMaxWidth(25);
   setMinWidth(5);
 };
 
+const getRandom = (min = 0.2) => Math.random() * (1 - min) + min;
 const drawLaser = () => {
   if (!ctx) return;
-  setColor(Math.random() * 255, Math.random() * 255, Math.random() * 255);
+  setColor(getRandom() * 255, getRandom() * 255, getRandom() * 255);
   // clear
   // ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
 

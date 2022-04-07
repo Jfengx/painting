@@ -1,7 +1,7 @@
 <template lang="pug">
 #home.rel.full-screen.flex-center.column
   .avatar.rel
-    img.full(src='@/assets/j.jpg' @click='enjoy')
+    img.full(src='@/assets/j.png' @click='enjoy')
     .desc 我画的很烂，但我很自信😎
   Laser
 
