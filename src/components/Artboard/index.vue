@@ -27,6 +27,7 @@ const gallery = [
 
 const canvas = ref<Nullable<HTMLCanvasElement>>(null);
 const scroll = reactive(useScroll(window));
+const mousePos = reactive(useMouseInElement(canvas));
 
 const H = window.innerHeight;
 
@@ -37,10 +38,21 @@ const currentId = computed(() => clamp(Math.floor(scroll.y / H)));
 onMounted(async () => {
   const { start, stop, update } = await draw(canvas.value!);
   start();
-  update({ curIdx: currentId.value, progress: 1 });
 
-  watch(currentId, (v) => {
-    update({ curIdx: v, progress: 1 });
+  const wrapUpdate = () => {
+    update({ curIdx: currentId.value, progress: 1, mousePos: [mousePos.x, mousePos.y] });
+  };
+
+  watch(
+    currentId,
+    () => {
+      wrapUpdate();
+    },
+    { immediate: true },
+  );
+
+  watch(mousePos, () => {
+    wrapUpdate();
   });
 
   onUnmounted(() => {

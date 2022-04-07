@@ -2,7 +2,9 @@ import vert from './index.vert';
 import frag from './index.frag';
 import createREGL, { Regl, Texture2D } from 'regl';
 
-type Props = Record<'time' | 'curIdx' | 'progress', number>;
+type Props = Record<'time' | 'curIdx' | 'progress', number> & {
+  mousePos: number[];
+};
 
 const DPR = window.devicePixelRatio || 2;
 
@@ -39,17 +41,21 @@ export async function draw(canvas: HTMLCanvasElement) {
     textureList[`${uniformName}[${i}]`] = texture;
   });
 
-  const picker = () =>
-    [
+  const picker = () => {
+    const transition = (from: number, to: number) =>
+      `transition(${uniformName}[${from}] , ${uniformName}[${to}], uv, u_progress)`;
+
+    return [
       'vec4 pick(float i, vec2 uv) {',
       'return',
       Array(total - 1)
         .fill(total - 1)
-        .map((n, i) => `i >= ${(n - i).toFixed(1)}\n? texture2D(${uniformName}[${n - i}], uv)`)
+        .map((n, i) => `i >= ${(n - i).toFixed(1)}\n? ${transition(n - i - 1, n - i)}`)
         .join('\n: '),
-      `${total === 1 ? '' : ':'} texture2D(${uniformName}[0], uv);`,
+      `${total === 1 ? '' : ':'} ${transition(0, 0)};`,
       '}',
     ].join('\n');
+  };
 
   const cmd = regl({
     vert,
@@ -70,6 +76,7 @@ export async function draw(canvas: HTMLCanvasElement) {
       u_time: (_, { time }: Props) => time,
       u_progress: (_, { progress }) => progress,
       u_curIdx: (_, { curIdx }) => curIdx,
+      u_mousePos: (_, { mousePos }) => mousePos.map((v) => v * DPR),
     },
     count: 4,
     primitive: 'triangle fan',
@@ -78,7 +85,7 @@ export async function draw(canvas: HTMLCanvasElement) {
   let cancel: Nullable<{ cancel: () => void }> = null;
   let props: Pick<Props, 'curIdx' | 'progress'> = { curIdx: 0, progress: 1 };
 
-  const update = (p: Pick<Props, 'curIdx' | 'progress'>) => {
+  const update = (p: Pick<Props, 'curIdx' | 'progress' | 'mousePos'>) => {
     Object.assign(props, p);
   };
 
