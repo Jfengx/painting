@@ -20,7 +20,7 @@ const gallery = [
   '《十连》',
   '《帅气史莱姆》',
   '《dream car》',
-].map((name) => ({ name, src: `/public/gallery/${name}.jpg` }));
+].map((name) => ({ name, src: `/src/assets/gallery/${name}.jpg` }));
 
 const canvas = ref<Nullable<HTMLCanvasElement>>(null);
 const scroll = reactive(useScroll(window));
