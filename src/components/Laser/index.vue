@@ -44,12 +44,11 @@ const drawLaser = () => {
   if (!ctx) return;
   setColor(Math.random() * 255, Math.random() * 255, Math.random() * 255);
   // clear
-  ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
+  // ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
 
   mouseTrack = drainPoints(mouseTrack);
 
   if (mouseTrack.length >= 3) {
-    console.log(mouseTrack);
     drawLaserPen(ctx!, mouseTrack);
   }
 };
@@ -78,5 +77,5 @@ onUnmounted(() => {
 
 <style lang="stylus" scoped>
 .laser
-  z-index 3
+  z-index 1
 </style>
