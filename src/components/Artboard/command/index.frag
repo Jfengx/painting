@@ -8,6 +8,28 @@ uniform sampler2D u_texture[N_TEX];
 
 varying vec2 v_uv;
 
+const float SCALE_RATIO = 1.2;
+const float CIRCLE_RADIUS = .325;
+
+vec2 scale(vec2 uv, vec2 center, float area) {
+  return mix(vec2(center.x + (uv.x - center.x) / SCALE_RATIO, center.y + (uv.y - center.y) / SCALE_RATIO), uv, area);
+}
+
+float circle(vec2 c, vec2 p, float r) {
+  vec2 pos = (p - c) * vec2(r, 1.);
+  return sqrt(dot(pos, pos));
+}
+
+vec2 mag(vec2 uv, vec2 mouse, vec2 res) {
+  vec2 center = mouse / res;
+  float circleRadius = circle(center, uv, res.x / res.y);
+  // 锋利
+  float sharpArea = step(CIRCLE_RADIUS, circleRadius);
+  // 过渡
+  float smoothArea = smoothstep(.0, CIRCLE_RADIUS, circleRadius);
+  return scale(uv, center, smoothArea);
+}
+
 vec4 mosaic(sampler2D oTex, vec2 oUv, float oBlock) {
   float block = clamp(oBlock, 1., 200.);
   vec2 uv = vec2(floor(oUv * block) / block);
@@ -22,7 +44,8 @@ vec4 offsetTex(sampler2D oTex, vec2 uv) {
   return texture;
 }
 
-vec4 transition(sampler2D from, sampler2D to, vec2 uv, float progress) {
+vec4 transition(sampler2D from, sampler2D to, vec2 rawUv, float progress) {
+  vec2 uv = mag(rawUv, u_mousePos, u_res);
   vec4 fromColor = texture2D(from, uv); // offsetTex(from, uv);
   vec4 toColor = texture2D(to, uv); // offsetTex(to, uv);
   return mix(fromColor, toColor, progress);

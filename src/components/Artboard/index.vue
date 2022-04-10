@@ -1,10 +1,10 @@
 <template lang="pug">
 .artboard.rel
   canvas.full(ref='canvas')
-    img(v-for='{ src } in gallery' :src='src')
+    img(v-for='{ src } in galleryList' :src='src')
   .title.rel
     p(
-       v-for='{ name }, index in gallery'
+       v-for='{ name }, index in galleryList'
        :key='name'
       :class="{ 'active': currentId === index }"
       ) {{ name }}
@@ -16,14 +16,9 @@ import { draw } from './command/index';
 const getImageUrl = (name: string) => {
   return new URL(`../../assets/gallery/${name}.jpg`, import.meta.url).href;
 };
-const gallery = [
-  '《害羞蓝人中了毒》',
-  '《持仓》',
-  '《奶茶、芝士、珍珠分装》',
-  '《十连》',
-  '《帅气史莱姆》',
-  '《dream car》',
-].map((name) => ({ name, src: getImageUrl(name) }));
+
+const { gallery } = defineProps<{ gallery: string[] }>();
+const galleryList = gallery.map((name) => ({ name, src: getImageUrl(name) }));
 
 const canvas = ref<Nullable<HTMLCanvasElement>>(null);
 const scroll = reactive(useScroll(window));
@@ -40,7 +35,13 @@ onMounted(async () => {
   start();
 
   const wrapUpdate = () => {
-    update({ curIdx: currentId.value, progress: 1, mousePos: [mousePos.x, mousePos.y] });
+    update({
+      curIdx: currentId.value,
+      progress: 1,
+      mousePos: [mousePos.elementX, canvas.value!.offsetHeight - mousePos.elementY].map((v) =>
+        Math.max(0, v),
+      ),
+    });
   };
 
   watch(
@@ -65,6 +66,7 @@ onMounted(async () => {
 .artboard
   width 50vw
   height 37.5vw
+  cursor zoom-in
   .title
     margin-top 5vw
     p
