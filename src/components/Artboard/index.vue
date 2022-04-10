@@ -65,8 +65,6 @@ onMounted(async () => {
 .artboard
   width 50vw
   height 37.5vw
-  canvas
-    margin-top -5vw
   .title
     margin-top 5vw
     p

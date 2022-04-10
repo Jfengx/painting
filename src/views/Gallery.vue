@@ -1,7 +1,7 @@
 <template lang="pug">
 #gallery
   .container
-    .inner.rel.sti.full-screen.flex-center
+    .inner.rel.sti.full-screen.flex-center.column
       Artboard
 </template>
 
@@ -13,5 +13,9 @@
     width 100%
     height 700vh
     .inner
-      //
+      .desc
+        top 20px
+        left 20px
+      .artboard
+        margin-top -5vw
 </style>
