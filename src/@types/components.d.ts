@@ -7,6 +7,7 @@ declare module 'vue' {
     Artboard: typeof import('./../components/Artboard/index.vue')['default']
     Laser: typeof import('./../components/Laser/index.vue')['default']
     Nav: typeof import('./../components/Nav/index.vue')['default']
+    WorldBox: typeof import('./../components/WorldBox/index.vue')['default']
   }
 }
 

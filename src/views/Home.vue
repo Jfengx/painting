@@ -7,7 +7,7 @@
     p(@click="enjoy('/gallery')") 我的画&nbsp;&nbsp;
     span |
     //- TODO
-    p(@click="enjoy('/gallery')") &nbsp;&nbsp;我的世界
+    p(@click="enjoy('/world')") &nbsp;&nbsp;我的世界
   Laser
 
 </template>
