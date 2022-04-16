@@ -1,6 +1,7 @@
 import vert from './index.vert';
 import frag from './index.frag';
 import createREGL, { Regl, Texture2D } from 'regl';
+import { loadImgs } from '@/utils/load';
 
 type Props = Record<'time' | 'curIdx' | 'progress', number> & {
   mousePos: number[];
@@ -8,22 +9,8 @@ type Props = Record<'time' | 'curIdx' | 'progress', number> & {
 
 const DPR = window.devicePixelRatio || 2;
 
-function loadImg(img: HTMLImageElement) {
-  const isLoaded = img.complete && img.naturalHeight !== 0;
-  return new Promise<HTMLImageElement>((resolve) => {
-    if (isLoaded) {
-      resolve(img);
-    } else {
-      img.onload = () => {
-        resolve(img);
-      };
-    }
-  });
-}
-
 async function createTexture(regl: Regl, img: HTMLImageElement) {
-  const data = await loadImg(img);
-  return regl.texture({ data, flipY: true });
+  return regl.texture({ data: img, flipY: true });
 }
 
 export async function draw(canvas: HTMLCanvasElement) {
@@ -32,6 +19,8 @@ export async function draw(canvas: HTMLCanvasElement) {
 
   const regl = createREGL({ canvas });
   const imgs = Array.from(canvas.querySelectorAll('img'));
+  await loadImgs(imgs);
+
   const total = imgs.length;
   const textures = await Promise.all(imgs.map((img) => createTexture(regl, img)));
 

@@ -1,7 +1,7 @@
 <template lang="pug">
 .artboard.rel
   canvas.full(ref='canvas')
-    img(v-for='{ src } in galleryList' :src='src')
+    img(v-for='{ src } in galleryList' :data-src='src')
   .title.rel
     p(
        v-for='{ name }, index in galleryList'
