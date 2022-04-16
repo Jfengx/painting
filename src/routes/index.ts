@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { useBreakpoints } from '@vueuse/core';
 import Home from '../views/Home.vue';
 
 const routes = [

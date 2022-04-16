@@ -3,6 +3,8 @@ import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
+import Inspect from 'vite-plugin-inspect';
+
 import glsl from 'vite-plugin-glsl';
 
 export default defineConfig({
@@ -18,6 +20,7 @@ export default defineConfig({
       dts: resolve(__dirname, 'src/@types/components.d.ts'),
     }),
     glsl(undefined, /\.(glsl|vert|frag|vs|fs)$/i, 'glsl'),
+    Inspect(),
   ],
   resolve: {
     alias: {
