@@ -6,6 +6,7 @@
 </template>
 
 <script setup lang="ts">
+// @todo 自动导入
 const gallery = [
   '《害羞蓝人中了毒》',
   '《持仓》',
@@ -15,6 +16,8 @@ const gallery = [
   '《dream car》',
   '《对号入座》',
   '《微信列表》',
+  '《方便面人》',
+  '《商品运力不足》',
 ];
 </script>
 
