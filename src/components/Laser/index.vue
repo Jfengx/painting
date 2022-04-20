@@ -17,6 +17,9 @@ import {
 let mouseTrack: IOriginalPointData[] = [];
 let ctx: Nullable<CanvasRenderingContext2D> = null;
 
+const emit = defineEmits(['mouseupdate']);
+const props = defineProps<{ isClear: boolean }>();
+
 const DPR = window.devicePixelRatio;
 const canvas = ref<Nullable<HTMLCanvasElement>>(null);
 const canvasSize = reactive<Record<'width' | 'height', number>>({ width: 0, height: 0 });
@@ -44,8 +47,10 @@ const getRandom = (min = 0.2) => Math.random() * (1 - min) + min;
 const drawLaser = () => {
   if (!ctx) return;
   setColor(getRandom() * 255, getRandom() * 255, getRandom() * 255);
-  // clear
-  // ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
+
+  if (props.isClear) {
+    ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
+  }
 
   mouseTrack = drainPoints(mouseTrack);
 
@@ -69,6 +74,7 @@ watch(mousePos, (pos) => {
     y: y * DPR,
     time: Date.now(),
   });
+  emit('mouseupdate', [pos.x, pos.y]);
 });
 
 onUnmounted(() => {

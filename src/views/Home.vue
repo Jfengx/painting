@@ -1,6 +1,6 @@
 <template lang="pug">
 #home.rel.full-screen.flex-center.column
-  .avatar.rel
+  .avatar.rel(:style="{ 'transform': transform.skew }")
     img.full(src='@/assets/j.png')
   .desc 我画的很烂，但我很自信😎
   .enjoy.flex-center
@@ -8,11 +8,41 @@
     span |
     //- TODO
     p(@click="enjoy('/world')") &nbsp;&nbsp;我的世界
-  Laser
+  Laser(
+    @mouseupdate='mouseupdate'
+    :isClear='isClear'
+  )
 
 </template>
 <script setup lang="ts">
 const router = useRouter();
+
+
+// should resize
+const { innerWidth, innerHeight } = window;
+
+const transform = reactive({
+  // translate: 'translate3d(0px, 0px, 0px)',
+  skew: 'skew(0deg, 0deg) translateZ(0)',
+});
+
+const isClear = ref(true)
+
+const transPos = (mousePos: number[]) => {
+  return mousePos.map((v, i) => {
+    if (i === 0) {
+      return (v / innerWidth) * 2 - 1;
+    } else {
+      return (v / innerHeight) * 2 - 1;
+    }
+  });
+};
+
+const mouseupdate = (mousePos: number[]) => {
+  const trans = transPos(mousePos).map((v) => v * 10);
+  // transform.translate = `translate3d(${trans[0]}px, ${trans[1]}px, 0px)`;
+  transform.skew = `skew(${trans[0]}deg, ${trans[1]}deg)`;
+};
 
 const enjoy = (path: string) => {
   router.push({ path });
@@ -22,6 +52,7 @@ const enjoy = (path: string) => {
 <style lang="stylus" scoped>
 #home
   background white
+  overflow hidden
   .avatar
     width 15vw
     height 15vw
@@ -31,18 +62,18 @@ const enjoy = (path: string) => {
     z-index 2
     img
       object-fit cover
-      &:hover
-        @keyframes shake
-          10%, 90%
-            transform rotate(-5deg)
-          20%, 80%
-            transform rotate(0deg)
-          30%, 50%, 70%
-            transform rotate(5deg)
-          40%, 60%
-            transform rotate(-5deg)
-        animation shake 0.82s cubic-bezier(.36,.07,.19,.97) both
-        transform translate3d(0, 0, 0);
+      // &:hover
+      //   @keyframes shake
+      //     10%, 90%
+      //       transform rotate(-5deg)
+      //     20%, 80%
+      //       transform rotate(0deg)
+      //     30%, 50%, 70%
+      //       transform rotate(5deg)
+      //     40%, 60%
+      //       transform rotate(-5deg)
+      //   animation shake 0.82s cubic-bezier(.36,.07,.19,.97) both
+      //   transform translate3d(0, 0, 0);
   .desc
     margin-top 50px
     z-index 3
