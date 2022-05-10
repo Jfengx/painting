@@ -4,10 +4,11 @@
     img.full(src='@/assets/j.png')
   .desc 我画的很烂，但我很自信😎
   .enjoy.flex-center
-    p(@click="enjoy('/gallery')") 我的画&nbsp;&nbsp;
-    span |
-    //- TODO
-    p(@click="enjoy('/world')") &nbsp;&nbsp;我的世界
+    p(@click="enjoy('/gallery')") 我的画
+    //- &nbsp;&nbsp;
+    //- span |
+    //- //- TODO
+    //- p(@click="enjoy('/world')") &nbsp;&nbsp;我的世界
   Laser(
     @mouseupdate='mouseupdate'
     :isClear='isClear'
@@ -17,7 +18,6 @@
 <script setup lang="ts">
 const router = useRouter();
 
-
 // should resize
 const { innerWidth, innerHeight } = window;
 
@@ -26,7 +26,7 @@ const transform = reactive({
   skew: 'skew(0deg, 0deg) translateZ(0)',
 });
 
-const isClear = ref(true)
+const isClear = ref(true);
 
 const transPos = (mousePos: number[]) => {
   return mousePos.map((v, i) => {
