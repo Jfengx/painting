@@ -18,7 +18,7 @@ let mouseTrack: IOriginalPointData[] = [];
 let ctx: Nullable<CanvasRenderingContext2D> = null;
 
 const emit = defineEmits(['mouseupdate']);
-const props = defineProps<{ isClear: boolean }>();
+const props = withDefaults(defineProps<{ isClear: boolean }>(), { isClear: false });
 
 const DPR = window.devicePixelRatio;
 const canvas = ref<Nullable<HTMLCanvasElement>>(null);

@@ -26,7 +26,7 @@ const transform = reactive({
   skew: 'skew(0deg, 0deg) translateZ(0)',
 });
 
-const isClear = ref(true);
+const isClear = ref(false);
 
 const transPos = (mousePos: number[]) => {
   return mousePos.map((v, i) => {
