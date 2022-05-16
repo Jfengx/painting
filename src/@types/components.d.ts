@@ -5,7 +5,6 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Artboard: typeof import('./../components/Artboard/index.vue')['default']
-    Hashboard: typeof import('./../components/Hashboard/index.vue')['default']
     Laser: typeof import('./../components/Laser/index.vue')['default']
     Nav: typeof import('./../components/Nav/index.vue')['default']
     Shot: typeof import('./../components/Shotboard/Shot.vue')['default']
