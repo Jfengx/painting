@@ -12,13 +12,14 @@
 
 <script setup lang="ts">
 import { draw } from './command/index';
+import type { GalleryList } from '@/views/Gallery.vue';
 
 const getImageUrl = (name: string) => {
   return new URL(`../../assets/gallery/${name}.jpg`, import.meta.url).href;
 };
 
-const { gallery } = defineProps<{ gallery: string[] }>();
-const galleryList = gallery.map((name) => ({ name, src: getImageUrl(name) }));
+const { gallery } = defineProps<{ gallery: GalleryList[] }>();
+const galleryList = gallery.map(({ name }) => ({ name, src: getImageUrl(name) }));
 
 const canvas = ref<Nullable<HTMLCanvasElement>>(null);
 const scroll = reactive(useScroll(window));

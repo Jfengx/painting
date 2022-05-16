@@ -11,8 +11,8 @@
 export type ShotPos = Record<'x' | 'y' | 'deg', number>;
 export type State = 'shot' | 'picked' | 'init';
 
-const props = defineProps<{ src: string; shotPos: ShotPos }>();
-const emits = defineEmits<{ (e: 'onStateChange', state: State): void }>();
+const props = defineProps<{ src: string; shotPos: ShotPos; order: number }>();
+const emits = defineEmits<{ (e: 'onStateChange', state: State, order: number): void }>();
 const imgLoaded = ref(false);
 
 let state = ref<State>('init');
@@ -43,7 +43,7 @@ const onImgLoaded = () => {
 };
 
 watch(state, (v) => {
-  emits('onStateChange', v);
+  emits('onStateChange', v, props.order);
 });
 
 onMounted(() => {
@@ -56,10 +56,10 @@ onMounted(() => {
 <style lang="stylus">
 .shot-img
   cursor pointer
-  width 20rem
-  height 15rem
-  top calc(50vh - 7.5rem)
-  left calc(50vw - 10rem)
+  width 20vw
+  height 15vw
+  top calc(50vh - 7.5vw)
+  left calc(50vw - 10vw)
   border-radius 0.75rem
   overflow hidden
   z-index 1
