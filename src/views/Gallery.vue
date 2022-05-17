@@ -50,7 +50,7 @@ const galleryList = reactive<GalleryList[]>([
   {
     name: '《微信列表》',
     date: '2022-4-10',
-    desc: '上海团长，我的超人',
+    desc: '六街坊团长！！！我的超人',
   },
   {
     name: '《方便面人》',
