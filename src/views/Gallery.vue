@@ -62,6 +62,11 @@ const galleryList = reactive<GalleryList[]>([
     date: '2022-4-19',
     desc: '盒马，叮咚 😒',
   },
+  {
+    name: '《  。》',
+    date: '2022-5-19',
+    desc: '一段恋情的结束',
+  },
 ]);
 </script>
 

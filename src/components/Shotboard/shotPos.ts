@@ -15,7 +15,7 @@ export const targetPos = [
     deg: 15,
   },
   {
-    x: -320,
+    x: -380,
     y: 96,
     deg: -5,
   },
@@ -25,17 +25,17 @@ export const targetPos = [
     deg: -10,
   },
   {
-    x: 192,
-    y: -16,
+    x: 302,
+    y: -206,
     deg: 60,
   },
   {
-    x: 608,
-    y: 48,
+    x: 508,
+    y: 148,
     deg: -10,
   },
   {
-    x: 96,
+    x: 26,
     y: 336,
     deg: -10,
   },
@@ -48,5 +48,10 @@ export const targetPos = [
     x: -800,
     y: 32,
     deg: -5,
+  },
+  {
+    x: 0,
+    y: 0,
+    deg: 0,
   },
 ];
