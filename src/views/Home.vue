@@ -4,11 +4,11 @@
     img.full(src='@/assets/j.png')
   .desc 我画的很烂，但我很自信😎
   .enjoy.flex-center
-    p(@click="enjoy('/gallery')") 我的画
-    //- &nbsp;&nbsp;
-    //- span |
-    //- //- TODO
-    //- p(@click="enjoy('/world')") &nbsp;&nbsp;我的世界
+    a(href='https://jf-blog.netlify.app/' target='_blank') 我的笔记 📒&nbsp;&nbsp;
+    span |
+    p(@click="enjoy('/gallery')") &nbsp;&nbsp; 我的画 🖼 &nbsp;&nbsp;
+    span |
+    a(href='https://j-circle.netlify.app/' target='_blank') &nbsp;&nbsp;奇怪的圆 ⭕️
   Laser(
     @mouseupdate='mouseupdate'
     :isClear='isClear'
@@ -91,10 +91,12 @@ const enjoy = (path: string) => {
     span
       color $color
     p
-      opacity 0.5
-      transition opacity .3s, transform .3s
+    a
+      text-decoration none
+      color $color
+      transition color .3s, transform .3s
       cursor pointer
       &:hover
-        opacity 1
-        transform scale(1.1)
+        color black
+        transform scale(1.05)
 </style>
