@@ -2,7 +2,7 @@
 #home.rel.full-screen.flex-center.column
   .avatar.rel(:style="{ 'transform': transform.skew }")
     img.full(src='@/assets/j.png')
-  .desc 我画的很烂，但我很自信😎
+  .desc 我画的很烂，但我很自信 😎
   .enjoy.flex-center
     a(href='https://jf-blog.netlify.app/' target='_blank') 我的笔记 📒&nbsp;&nbsp;
     span |
@@ -77,8 +77,9 @@ const enjoy = (path: string) => {
   .desc
     margin-top 50px
     z-index 3
-    color white
+    // color white
     mix-blend-mode difference
+    text-shadow 0 0 2px rgb(104 182 255 / 50%)
   .enjoy
     $color = #878bb2
     font-size 12px
