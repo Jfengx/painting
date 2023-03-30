@@ -8,7 +8,7 @@
     span |
     p(@click="enjoy('/gallery')") &nbsp;&nbsp; 我的画 🖼 &nbsp;&nbsp;
     span |
-    a(href='https://j-circle.netlify.app/' target='_blank') &nbsp;&nbsp;奇怪的圆 ⭕️
+    a(href='https://j-artists.netlify.app/' target='_blank') &nbsp;&nbsp;WebGL 🤩
   Laser(
     @mouseupdate='mouseupdate'
     :isClear='isClear'
